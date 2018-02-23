@@ -95,6 +95,9 @@ function appendChartBars()
     //    width: Now that we have the mapping previously done (linear)
     //           we just pass the sales and use the X axis conversion to
     //           get the right value
+
+    //helper that returns a color based on an ID
+    var barColor = d3.scaleOrdinal(d3.schemeCategory20);
     newRects.append('rect')
       .attr('x', x(0))
       .attr('y', function(d, i) {
@@ -102,8 +105,11 @@ function appendChartBars()
       })
       .attr('height', function(d, i) {
             return y.bandwidth() - 5;
-            })
+      })
       .attr('width', function(d, i) {
         return x(d.sales);
+      })
+      .attr('fill', function(d) {
+        return barColor(d.product);
       });
 }
